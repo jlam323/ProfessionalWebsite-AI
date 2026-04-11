@@ -21,146 +21,150 @@ export function ExperienceSection({ currentTheme }: { currentTheme: ThemeColors 
       
       <div className="flex flex-col md:flex-row gap-0 flex-1 min-h-0">
         {/* Role selector — slanted tabs */}
-        <div className="w-full md:w-[220px] flex-shrink-0 flex md:flex-col gap-4 p-2 md:pr-8 overflow-x-auto md:overflow-x-visible no-scrollbar">
+        <div className="w-full md:w-[200px] flex-shrink-0 flex md:flex-col gap-3 p-2 md:pr-6 overflow-x-auto md:overflow-x-visible no-scrollbar">
           {experiences.map((exp, idx) => (
-            <motion.button
+            <button
               key={idx}
               onClick={() => setActiveExp(idx)}
-              whileHover={{ scale: 1.05, x: 10 }}
-              whileTap={{ scale: 0.95 }}
-              className={`px-4 py-4 lg:px-8 lg:py-6 transition-all relative cursor-pointer transform -skew-x-12 border-l-[12px] text-left group ${
+              className={`px-4 py-3 lg:px-6 lg:py-4 transition-all relative cursor-pointer transform -skew-x-12 border-l-8 text-left group ${
                 activeExp === idx 
-                  ? "border-white shadow-[12px_12px_0px_#000] z-10" 
-                  : "bg-p5-black border-p5-red/20 opacity-40 hover:opacity-100"
+                  ? "border-white shadow-[8px_8px_0px_#000] z-10" 
+                  : "bg-p5-black border-p5-red/30 opacity-60 hover:opacity-100"
               }`}
               style={{ backgroundColor: activeExp === idx ? currentTheme.primary : undefined }}
             >
-              <div className={`font-display text-lg lg:text-xl font-black tracking-tighter transform skew-x-12 leading-none transition-colors ${activeExp === idx ? "text-white" : "p5-red-text"}`}>
+              {activeExp === idx && (
+                <motion.div 
+                  layoutId="activeTabGlow"
+                  className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent pointer-events-none" 
+                />
+              )}
+              <div className={`font-display text-base font-black tracking-tighter transform skew-x-12 leading-none transition-colors ${activeExp === idx ? "text-white" : "p5-red-text"}`}>
                 {exp.company}
               </div>
-              <div className={`font-mono text-[10px] mt-3 transform skew-x-12 font-bold tracking-widest ${activeExp === idx ? "text-white/80" : "text-gray-600"}`}>
+              <div className={`font-mono text-[9px] mt-2 transform skew-x-12 font-bold ${activeExp === idx ? "text-white" : "text-gray-600"}`}>
                 {exp.period}
               </div>
               
               {/* Decorative star for active tab */}
               {activeExp === idx && (
-                <motion.div 
-                  initial={{ scale: 0, rotate: -45 }}
-                  animate={{ scale: 1, rotate: 12 }}
-                  className="absolute -right-3 -top-3 p-1.5 shadow-lg"
+                <div 
+                  className="absolute -right-2 -top-2 p-1 transform rotate-12 shadow-sm"
                   style={{ backgroundColor: currentTheme.accent }}
                 >
-                  <Star size={14} className="fill-p5-black text-p5-black" />
-                </motion.div>
+                  <Star size={10} className="fill-p5-black text-p5-black" />
+                </div>
               )}
-            </motion.button>
+            </button>
           ))}
         </div>
 
         {/* Detail */}
-        <div className="flex-1 md:pl-12 mt-12 md:mt-0 overflow-y-auto no-scrollbar relative">
+        <div className="flex-1 md:pl-8 mt-8 md:mt-0 overflow-y-auto no-scrollbar relative">
           {/* Decorative background element */}
           <motion.div 
             animate={{ backgroundColor: currentTheme.primary }}
-            className="absolute top-0 right-0 w-96 h-96 opacity-5 -z-10 transform rotate-45 translate-x-48 -translate-y-24"
+            className="absolute top-0 right-0 w-64 h-64 opacity-5 -z-10 transform rotate-12 translate-x-32 -translate-y-16"
           ></motion.div>
           
           <AnimatePresence mode="wait">
             <motion.div
               key={activeExp}
-              initial={{ x: 50, opacity: 0, skewX: 5 }}
-              animate={{ x: 0, opacity: 1, skewX: 0 }}
-              exit={{ x: -50, opacity: 0, skewX: -5 }}
-              transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-              className="space-y-12 pb-12"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -20, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "circOut" }}
+              className="space-y-8"
             >
-              <div className="relative">
-                <div className="flex items-center gap-6 mb-8">
-                  <motion.div 
-                    animate={{ 
-                      backgroundColor: currentTheme.secondary === "#000000" ? "#000" : currentTheme.primary, 
-                      borderBottomColor: currentTheme.primary,
-                      boxShadow: `6px 6px 0px ${currentTheme.primary}4D`
-                    }}
-                    className="text-white px-6 py-1.5 font-display text-sm font-black tracking-widest transform -skew-x-12 border-b-4"
-                  >
-                    {job.location || "REMOTE"}
-                  </motion.div>
-                  <motion.div 
-                    animate={{ backgroundImage: `linear-gradient(to right, ${currentTheme.primary}, transparent)` }}
-                    className="h-1 flex-1 opacity-30"
-                  ></motion.div>
-                </div>
-
-                <div className="relative z-10">
-                  <h3 className="text-4xl lg:text-6xl font-black italic transform -skew-x-6 p5-text-shadow leading-[0.9] mb-4">
-                    {job.org}
-                  </h3>
-                  <motion.div 
-                    animate={{ 
-                      backgroundColor: currentTheme.primary, 
-                      color: "white",
-                      boxShadow: `8px 8px 0px #000`
-                    }}
-                    className="inline-block px-6 py-2 transform -skew-x-12 font-display text-xl lg:text-2xl font-black tracking-tighter italic"
-                  >
-                    {job.role}
-                  </motion.div>
-                </div>
+              <div className="flex items-center gap-4">
+                <motion.div 
+                  animate={{ 
+                    backgroundColor: currentTheme.secondary === "#000000" ? "#000" : currentTheme.primary, 
+                    borderBottomColor: currentTheme.primary,
+                    boxShadow: `4px 4px 0px ${currentTheme.primary}4D` // 4D is approx 30% opacity
+                  }}
+                  className="text-white px-4 py-1 font-display text-xs font-black tracking-widest transform -skew-x-12 border-b-4"
+                >
+                  {job.location || ""}
+                </motion.div>
+                <motion.div 
+                  animate={{ backgroundImage: `linear-gradient(to right, ${currentTheme.primary}, transparent)` }}
+                  className="h-px flex-1"
+                ></motion.div>
               </div>
 
-              <div className="font-mono text-base font-black tracking-[0.2em] flex items-center gap-4">
+              <div className="relative z-10">
+                <h3 className="text-3xl lg:text-4xl font-black italic transform -skew-x-6 p5-text-shadow-tight leading-[0.9] mb-4">
+                  {job.org}
+                </h3>
+                <motion.div 
+                  animate={{ 
+                    backgroundColor: currentTheme.primary, 
+                    color: "white",
+                    boxShadow: `4px 4px 0px #000`
+                  }}
+                  className="inline-block px-4 py-2 transform -skew-x-12 font-display text-sm lg:text-base font-black tracking-tighter"
+                >
+                  {job.role}
+                </motion.div>
+              </div>
+
+              <div className="font-mono text-sm font-bold tracking-widest flex items-center gap-3">
                 <motion.div 
                   animate={{ backgroundColor: currentTheme.primary }}
-                  className="w-12 h-1"
+                  className="w-8 h-0.5"
                 ></motion.div>
-                <motion.span animate={{ color: currentTheme.primary }} className="uppercase">{job.period}</motion.span>
+                <motion.span animate={{ color: currentTheme.primary }}>{job.period}</motion.span>
               </div>
 
-              <div className="grid grid-cols-1 gap-6 relative">
+              <motion.div 
+                animate={{ borderLeftColor: currentTheme.primary }}
+                className="space-y-4 bg-white/5 p-6 border-l-4 relative overflow-hidden"
+              >
                 {/* Halftone-like decorative pattern */}
                 <motion.div 
-                  animate={{ backgroundImage: `radial-gradient(${currentTheme.primary} 2px,transparent 2px)` }}
-                  className="absolute inset-0 opacity-10 pointer-events-none [background-size:12px_12px] -z-10"
+                  animate={{ backgroundImage: `radial-gradient(${currentTheme.primary} 1px,transparent 1px)` }}
+                  className="absolute inset-0 opacity-5 pointer-events-none [background-size:8px_8px]"
                 ></motion.div>
                 
                 {job.bullets.map((bullet, i) => (
                   <motion.div 
                     key={i} 
-                    initial={{ x: -30, opacity: 0, rotate: i % 2 === 0 ? -1 : 1 }}
-                    animate={{ x: 0, opacity: 1, rotate: i % 2 === 0 ? -0.5 : 0.5 }}
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: 0.2 + i * 0.1 }}
-                    whileHover={{ scale: 1.02, rotate: 0, zIndex: 20 }}
-                    className="p-6 bg-white border-l-[12px] shadow-[8px_8px_0px_#000] relative group transition-all"
-                    style={{ borderLeftColor: currentTheme.primary }}
+                    className="flex gap-4 items-start"
                   >
-                    <div className="absolute top-2 right-4 opacity-10 font-display font-black text-4xl italic group-hover:opacity-20 transition-opacity">
-                      0{i + 1}
+                    <div className="mt-1 flex-shrink-0">
+                      <div className="relative">
+                        <motion.div 
+                          animate={{ backgroundColor: currentTheme.primary }}
+                          className="w-6 h-6 transform -skew-x-12 flex items-center justify-center shadow-[3px_3px_0px_#000]"
+                        >
+                          <Star size={14} className="fill-white text-white" />
+                        </motion.div>
+                        <motion.div 
+                          animate={{ backgroundColor: currentTheme.accent }}
+                          className="absolute -top-1 -right-1 w-2 h-2 transform rotate-45 opacity-50"
+                        />
+                      </div>
                     </div>
-                    <p className="font-mono text-sm lg:text-base text-p5-black font-bold leading-relaxed relative z-10">
+                    <p className="font-mono text-sm text-p5-black font-bold leading-relaxed bg-p5-white/90 p-2 transform -skew-x-1 shadow-[4px_4px_0px_#000] w-full">
                       {bullet}
                     </p>
                   </motion.div>
                 ))}
-              </div>
+              </motion.div>
 
-              <div className="flex flex-wrap gap-4 mt-12">
+              <div className="flex flex-wrap gap-4 mt-8">
                 {job.tags.map((tag, i) => (
                   <motion.span 
                     key={tag} 
-                    initial={{ scale: 0, rotate: -10 }}
-                    animate={{ 
-                      scale: 1, 
-                      rotate: -12,
-                      boxShadow: `6px 6px 0px #000` 
-                    }}
-                    whileHover={{ 
-                      backgroundColor: currentTheme.primary,
-                      scale: 1.1,
-                      rotate: 0
-                    }}
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1, boxShadow: `4px 4px 0px ${currentTheme.accent}` }}
+                    whileHover={{ backgroundColor: currentTheme.primary }}
                     transition={{ delay: 0.5 + i * 0.05 }}
-                    className="font-display text-xs font-black text-white bg-p5-black px-5 py-2.5 tracking-widest transition-all cursor-default border-b-2 border-white/20"
+                    className="font-display text-xs font-black text-white bg-p5-black px-4 py-2 transform -skew-x-12 tracking-widest transition-colors cursor-default"
                   >
                     {tag}
                   </motion.span>
