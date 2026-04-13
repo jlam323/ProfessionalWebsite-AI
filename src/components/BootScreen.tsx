@@ -12,7 +12,7 @@ export function BootScreen({ onComplete }: { onComplete: () => void }) {
     "COFFEE CUP FILLED",
     "COGNITIVE SCAN OK",
     "METAVERSE CALIBRATED",
-    `PERSONA SYSTEM v5.0 LOADED (${Math.round((loadedCount / 27) * 100)}%)`,
+    `PERSONA SYSTEM v5.0 ${loadedCount < 27 ? `LOADING ${Math.round((loadedCount / 27) * 100)}%` : "LOADED"}`,
     "ONLINE - BEGINNING DIVE..."
   ];
 
@@ -34,7 +34,7 @@ export function BootScreen({ onComplete }: { onComplete: () => void }) {
       const promises = Array.from({ length: total }, (_, i) => {
         return new Promise((resolve) => {
           const img = new Image();
-          img.src = new URL(`../assets/cut-in-${i + 1}.webp`, import.meta.url).href;
+          img.src = `/assets/cut-in-${i + 1}.webp`;
           const finish = () => {
             count++;
             setLoadedCount(count);

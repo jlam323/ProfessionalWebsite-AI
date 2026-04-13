@@ -31,7 +31,7 @@ export default function App() {
 
   const triggerCutIn = useCallback(() => {
     const randomNum = Math.floor(Math.random() * 27) + 1;
-    const imgUrl = new URL(`./assets/cut-in-${randomNum}.webp`, import.meta.url).href;
+    const imgUrl = `/assets/cut-in-${randomNum}.webp`;
     
     // The images are already preloaded in the BootScreen, 
     // but we still set the state to trigger the animation
