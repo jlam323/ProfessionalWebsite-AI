@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { useBlink } from "../hooks/useBlink";
-import p5Background from "../assets/p5 background.png";
 import { cutInMap } from "../assets/cutInAssets";
 
 export function BootScreen({ onComplete }: { onComplete: () => void }) {
@@ -83,7 +82,7 @@ export function BootScreen({ onComplete }: { onComplete: () => void }) {
         initial={{ opacity: 0, scale: 1.1 }}
         animate={{ opacity: 0.75, scale: 1 }}
         transition={{ duration: 2, ease: "easeOut" }}
-        src={p5Background} 
+        src="/assets/p5-background.png" 
         alt="" 
         className="hidden lg:block absolute top-0 right-0 h-full w-auto object-cover pointer-events-none z-0 origin-right"
         referrerPolicy="no-referrer"
