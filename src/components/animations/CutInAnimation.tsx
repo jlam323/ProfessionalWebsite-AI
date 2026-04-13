@@ -62,7 +62,7 @@ export function CutInAnimation({ imageUrl, isVisible, onComplete }: CutInAnimati
               className="relative mb-0 lg:mb-[3%] lg:mr-[5%] h-[40%] aspect-[2/1] lg:h-[50%]"
             >
               <img 
-                src={"/images/cut-in-5.webp"} 
+                src={imageUrl} 
                 alt="Cut-in" 
                 className="w-full h-full object-contain filter drop-shadow-[10px_10px_0px_rgba(0,0,0,0.5)]"
                 referrerPolicy="no-referrer"
