@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 import { useBlink } from "../hooks/useBlink";
 import p5Background from "../assets/p5 background.png";
 
-export function BootScreen({ onComplete }: { onComplete: () => void }) {
+export function BootScreen({ onComplete, cutInImages }: { onComplete: () => void; cutInImages: Record<string, any> }) {
   const [step, setStep] = useState(0);
   const [loadedCount, setLoadedCount] = useState(0);
   const blink = useBlink(400);
@@ -34,7 +34,12 @@ export function BootScreen({ onComplete }: { onComplete: () => void }) {
       const promises = Array.from({ length: total }, (_, i) => {
         return new Promise((resolve) => {
           const img = new Image();
-          img.src = `/assets/cut-in-${i + 1}.webp`;
+          const path = `../assets/cut-in-${i + 1}.webp`;
+          // The paths in cutInImages are relative to App.tsx, which is ./assets/...
+          // But here we are in components/BootScreen.tsx, so the glob might be different if it was defined here.
+          // However, we are passing the map from App.tsx, so we use the keys from there.
+          const appPath = `./assets/cut-in-${i + 1}.webp`;
+          img.src = cutInImages[appPath].default;
           const finish = () => {
             count++;
             setLoadedCount(count);
@@ -48,7 +53,7 @@ export function BootScreen({ onComplete }: { onComplete: () => void }) {
     };
 
     preloadImages();
-  }, []);
+  }, [cutInImages]);
 
   // Check for completion
   useEffect(() => {
