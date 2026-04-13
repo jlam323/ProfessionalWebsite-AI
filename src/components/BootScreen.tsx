@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { useBlink } from "../hooks/useBlink";
 import p5Background from "../assets/p5 background.png";
+import { cutInMap } from "../assets/cutInAssets";
 
-export function BootScreen({ onComplete, cutInImages }: { onComplete: () => void; cutInImages: Record<string, any> }) {
+export function BootScreen({ onComplete }: { onComplete: () => void }) {
   const [step, setStep] = useState(0);
   const [loadedCount, setLoadedCount] = useState(0);
   const blink = useBlink(400);
@@ -34,26 +35,34 @@ export function BootScreen({ onComplete, cutInImages }: { onComplete: () => void
       const promises = Array.from({ length: total }, (_, i) => {
         return new Promise((resolve) => {
           const img = new Image();
-          const path = `../assets/cut-in-${i + 1}.webp`;
-          // The paths in cutInImages are relative to App.tsx, which is ./assets/...
-          // But here we are in components/BootScreen.tsx, so the glob might be different if it was defined here.
-          // However, we are passing the map from App.tsx, so we use the keys from there.
-          const appPath = `./assets/cut-in-${i + 1}.webp`;
-          img.src = cutInImages[appPath].default;
+          const imgUrl = cutInMap[i + 1];
+          
+          if (!imgUrl) {
+            console.warn(`Asset cut-in-${i + 1} not found in map`);
+            count++;
+            setLoadedCount(count);
+            resolve(null);
+            return;
+          }
+
+          img.src = imgUrl;
           const finish = () => {
             count++;
             setLoadedCount(count);
             resolve(null);
           };
           img.onload = finish;
-          img.onerror = finish;
+          img.onerror = () => {
+            console.error(`Failed to load asset: ${imgUrl}`);
+            finish();
+          };
         });
       });
       await Promise.all(promises);
     };
 
     preloadImages();
-  }, [cutInImages]);
+  }, []);
 
   // Check for completion
   useEffect(() => {
