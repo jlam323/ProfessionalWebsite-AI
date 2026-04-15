@@ -28,12 +28,15 @@ export function HomeSection({ animStyle, setAnimStyle, currentTheme }: HomeSecti
           <button
             key={style.id}
             onClick={() => setAnimStyle(style.id as AnimStyle)}
-            className={`px-3 py-1 font-display font-black italic text-[9px] tracking-widest transform -skew-x-12 transition-all border-2 ${
+            className={`p5-button text-[10px] tracking-[0.2em] uppercase ${
               animStyle === style.id 
-                ? "text-white border-white scale-110 shadow-[4px_4px_0px_#000]" 
-                : "bg-white text-p5-black border-p5-black hover:bg-gray-100"
+                ? "scale-110 z-10" 
+                : "opacity-80 hover:opacity-100"
             }`}
-            style={{ backgroundColor: animStyle === style.id ? style.color : undefined }}
+            style={{ 
+              backgroundColor: animStyle === style.id ? style.color : undefined,
+              borderColor: animStyle === style.id ? "white" : "transparent"
+            }}
           >
             {style.label}
           </button>

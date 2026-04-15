@@ -47,9 +47,8 @@ export function Sidebar({ activeSection, setActiveSection, currentTheme, isColla
       {/* Decorative Red Stripe */}
       <motion.div 
         animate={{ backgroundColor: currentTheme.primary }}
-        className="absolute -bottom-20 -left-20 w-64 h-64 rotate-45 opacity-50"
+        className="absolute -bottom-20 -left-20 w-64 h-64 rotate-45 opacity-30 p5-halftone"
       ></motion.div>
-      
       
       <div className="relative z-10">
         <AnimatePresence>
@@ -62,22 +61,22 @@ export function Sidebar({ activeSection, setActiveSection, currentTheme, isColla
             >
               <h1 
                 onClick={() => setActiveSection("home")}
-                className="text-4xl lg:text-5xl leading-[0.8] mb-4 italic font-black p5-text-shadow cursor-pointer group/name transition-transform hover:scale-105 active:scale-95 origin-left"
+                className="text-4xl lg:text-6xl leading-[0.75] mb-8 italic font-black p5-text-shadow cursor-pointer group/name transition-transform hover:scale-105 active:scale-95 origin-left uppercase"
               >
                 {resumeData.personalInfo.firstName}<br />
                 <motion.span 
                   animate={{ color: currentTheme.primary }}
-                  className="bg-white px-3 inline-block transform -skew-x-12 mt-2 p5-text-shadow-white shadow-[8px_8px_0px_#000] group-hover/name:shadow-[12px_12px_0px_#000] transition-shadow"
+                  className="bg-white px-4 inline-block transform -skew-x-12 mt-4 p5-text-shadow-white shadow-[12px_12px_0px_#000] group-hover/name:shadow-[16px_16px_0px_#000] transition-shadow"
                 >
                   {resumeData.personalInfo.lastName}
                 </motion.span>
               </h1>
-              <div className="flex items-center gap-4 mt-4">
+              <div className="flex items-center gap-6 mt-8">
                 <motion.div 
                   animate={{ backgroundColor: currentTheme.primary }}
-                  className="w-12 h-0.5"
+                  className="w-16 h-1.5 transform -skew-x-12"
                 ></motion.div>
-                <p className="font-mono text-[10px] tracking-widest opacity-70 uppercase">
+                <p className="font-mono text-xs tracking-[0.3em] opacity-70 uppercase font-bold">
                   {resumeData.personalInfo.role}
                 </p>
               </div>

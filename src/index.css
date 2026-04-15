@@ -32,6 +32,20 @@
   clip-path: polygon(0 15%, 100% 0, 100% 85%, 0 100%);
 }
 
+.p5-jagged {
+  clip-path: polygon(0% 0%, 100% 5%, 95% 100%, 5% 95%);
+}
+
+.p5-halftone {
+  background-image: radial-gradient(currentColor 1px, transparent 1px);
+  background-size: 6px 6px;
+}
+
+.p5-ink-splatter {
+  mask-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+  mask-size: cover;
+}
+
 .p5-nav-item {
   @apply relative px-8 py-2 font-display text-2xl transition-all duration-200 cursor-pointer;
   transform: skewX(-15deg);
@@ -46,6 +60,27 @@
   @apply bg-p5-white text-p5-black p-6 relative;
   transform: skewY(-1deg);
   box-shadow: 12px 12px 0px var(--color-p5-red);
+  transition: all 0.2s ease;
+}
+
+.p5-card:hover {
+  transform: skewY(-1.5deg) scale(1.01);
+  box-shadow: 16px 16px 0px var(--color-p5-red);
+}
+
+.p5-button {
+  @apply relative px-6 py-2 font-display font-black italic text-lg transition-all duration-200 cursor-pointer overflow-hidden;
+  transform: skewX(-12deg);
+  background: var(--color-p5-black);
+  color: white;
+  border: 2px solid white;
+  box-shadow: 4px 4px 0px var(--color-p5-red);
+}
+
+.p5-button:hover {
+  @apply -translate-y-1 translate-x-1;
+  box-shadow: 8px 8px 0px var(--color-p5-red);
+  background: var(--color-p5-red);
 }
 
 /* Aggressive P5 Text Shadow */
