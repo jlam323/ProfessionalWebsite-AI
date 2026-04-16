@@ -2,15 +2,55 @@ import { motion } from "motion/react";
 import { Mail, Linkedin, Send } from "lucide-react";
 import resumeData from "../data.json";
 import { ThemeColors } from "../types";
-import { RansomText } from "../components/RansomText";
 
 export function ContactSection({ currentTheme }: { currentTheme: ThemeColors }) {
   return (
-    <div className="space-y-24 pb-24">
-      <div className="relative">
-        <RansomText text="CALLING CARD" delay={0.2} />
-        <div className="absolute -bottom-4 left-0 w-full h-2 bg-p5-black transform -skew-x-12"></div>
-      </div>
+    <div className="space-y-16">
+      <h2 className="text-3xl lg:text-6xl italic font-black leading-none mb-12 uppercase">CALLING CARD</h2>
+      
+      {/*
+      <motion.div 
+        animate={{ boxShadow: `12px 12px 0px ${currentTheme.primary}` }}
+        className="p5-card bg-p5-black text-white border-none"
+      >
+        <div className="space-y-8">
+          <p className="text-xl italic">
+            "{resumeData.contact.quote}"
+          </p>
+          <motion.div 
+            animate={{ backgroundColor: currentTheme.primary }}
+            className="h-0.5 w-full opacity-50"
+          ></motion.div>
+          <div className="space-y-6 font-mono">
+            <div className="flex items-center gap-4 group cursor-pointer">
+              <motion.div 
+                animate={{ backgroundColor: currentTheme.primary }}
+                className="w-10 h-10 flex items-center justify-center transform -rotate-12 group-hover:rotate-0 transition-transform"
+              >
+                <Mail size={20} />
+              </motion.div>
+              <motion.span 
+                whileHover={{ color: currentTheme.primary }}
+                className="text-lg transition-colors"
+              >
+                {resumeData.personalInfo.email}
+              </motion.span>
+            </div>
+            <div className="flex items-center gap-4 group cursor-pointer">
+              <div className="w-10 h-10 bg-white text-p5-black flex items-center justify-center transform rotate-12 group-hover:rotate-0 transition-transform">
+                <Linkedin size={20} />
+              </div>
+              <motion.span 
+                whileHover={{ color: currentTheme.primary }}
+                className="text-lg transition-colors"
+              >
+                {resumeData.personalInfo.linkedin}
+              </motion.span>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+      */}
 
       <motion.div 
         initial={{ rotate: 5, scale: 0.9, opacity: 0 }}
@@ -33,10 +73,10 @@ export function ContactSection({ currentTheme }: { currentTheme: ThemeColors }) 
           <div className="relative z-10 space-y-12">
             <div className="flex items-start gap-6">
               <div className="bg-p5-black text-white p-4 transform -rotate-12 shadow-[4px_4px_0px_#fff]">
-                <Send size={32} />
+                <Send size={28} />
               </div>
               <div className="flex-1">
-                <p className="text-2xl lg:text-4xl font-black italic text-white leading-tight p5-text-shadow uppercase">
+                <p className="text-lg lg:text-xl font-black italic text-white leading-tight p5-text-shadow uppercase">
                   "{resumeData.contact.quote}"
                 </p>
                 <div className="mt-4 h-1 w-32 bg-white transform -skew-x-12"></div>
@@ -54,7 +94,7 @@ export function ContactSection({ currentTheme }: { currentTheme: ThemeColors }) 
                 </div>
                 <div className="flex flex-col">
                   <span className="font-mono text-[10px] text-white/50 uppercase tracking-widest">Direct Line</span>
-                  <span className="text-white font-display font-black italic text-lg lg:text-xl break-all">
+                  <span className="text-white font-display font-black italic text-sm lg:text-base break-all">
                     {resumeData.personalInfo.email}
                   </span>
                 </div>
@@ -79,12 +119,9 @@ export function ContactSection({ currentTheme }: { currentTheme: ThemeColors }) 
               </motion.a>
             </div>
 
-            <div className="pt-8 flex justify-between items-end">
-              <div className="font-display font-black italic text-white/30 text-4xl lg:text-6xl select-none">
-                TAKE YOUR HEART
-              </div>
-              <div className="bg-white text-p5-black px-6 py-2 font-display font-black italic transform -skew-x-12 shadow-[4px_4px_0px_#000]">
-                SIGNED: PHANTOM
+            <div className="pt-6 flex justify-end items-end">
+              <div className="font-display font-black italic text-white/30 text-2xl lg:text-3xl select-none">
+                SEE YOU SPACE COWBOY...
               </div>
             </div>
           </div>
@@ -95,20 +132,11 @@ export function ContactSection({ currentTheme }: { currentTheme: ThemeColors }) 
         <div className="absolute -bottom-4 right-1/4 w-40 h-10 bg-p5-black/10 transform rotate-6 -z-10"></div>
       </motion.div>
 
-      <div className="mt-24 relative overflow-hidden py-12">
-        <div className="absolute inset-0 p5-halftone opacity-5"></div>
-        <div className="max-w-xl mx-auto text-center space-y-4">
-          <p className="font-mono text-xs opacity-50 tracking-[0.5em] uppercase">
-            // ENCRYPTION: ACTIVE<br />
-            // LOCATION_MASK: ENABLED<br />
-            // COGNITIVE_PSI: STABLE
-          </p>
-          <div className="flex justify-center gap-2">
-            {[...Array(5)].map((_, i) => (
-              <div key={i} className="w-2 h-2 bg-p5-red transform rotate-45"></div>
-            ))}
-          </div>
-        </div>
+      <div className="mt-4 p-4 lg:p-8 border-4 border-p5-gray border-dashed transform -rotate-1 opacity-75">
+        <p className="text-center font-mono text-xs opacity-50">
+          // ENCRYPTION: ACTIVE<br />
+          // LOCATION_MASK: ENABLED
+        </p>
       </div>
     </div>
   );
